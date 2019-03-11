@@ -82,3 +82,35 @@ module.exports = function (api) {
 ..
 
 ### JSON
+
+Fetching content from local json files as a data source is easy, just like all the other data format (YAML, Markdown ...).
+
+1. First install `@gridsome/source-filesystem` and `@gridsome/transformer-json` plugins
+2. Edit `gridsome.config.js` :
+
+```
+module.exports = {
+  siteName: 'My Project',
+  plugins: [
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: 'data/**/*.json',
+        typeName: 'JsonData',
+        route: '/data/:slug',
+        create: true,
+        json: {
+          plugins: [
+            '@gridsome/transformer-json'
+          ]
+        }
+      }
+    },
+  ]
+}
+```
+
+3. Put your JSON file and directoy (data/your-json-file.json) in the root of your app, which is the src parent.
+4. Start exploring & testing your data model with [GraphQL explorer (Playground)](https://gridsome.org/docs/querying-data/#explore--test-queries) 
+5. When you are happy with query axploration, bump it in your app like the following [Query data in Pages](https://gridsome.org/docs/querying-data/#query-data-in-pages)
+6. Profit
